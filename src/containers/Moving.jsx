@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import "./Moving.css";
 import galleryList from "./data.js";
 import { FaSearch } from "react-icons/fa";
-import data from "./data.js";
+import { LazyLoadImage } from 'react-lazy-loading'
 
 const Card = ({ src, title, id, index, moveImage }) => {
   const ref = React.useRef(null);
@@ -60,7 +60,7 @@ const Card = ({ src, title, id, index, moveImage }) => {
 
   return (
     <div ref={ref} style={{ opacity }} className="card">
-      <img src={src} alt={title} />
+      <img loading="lazy" src={src} alt={title} />
     </div>
   );
 };
@@ -82,10 +82,15 @@ const Moving = () => {
 
   const filteredItems = getFilteredItems(search, data);
 
-  window.onload = function () {
-    setLoading(false);
-    console.log("page has loaded");
-  };
+  // useEffect(() => {
+  //   window.onload = function () {
+  //     setLoading(false);
+  //     console.log("page has loaded");
+  //   }
+  //   return () => {
+  //     window.onload = false
+  //   }
+  // }, []);
 
   const moveImage = React.useCallback((dragIndex, hoverIndex) => {
     setImages((prevCards) => {
@@ -113,37 +118,34 @@ const Moving = () => {
           <FaSearch />
         </div>
       </div>
-      {loading ? (
-        <span className="load">
-          <p className="loadingspinner"></p>
-          <p className="loading">Loading...</p>
-        </span>
-      ) : (
-        <div>
-          <div className="tags">
-            <span>All</span>
-            <span>Cars</span>
-            <span>Art</span>
-            <span>Workout</span>
-          </div>
-          <main>
-            {React.Children.toArray(
-              images.map((image, index) => (
-                <div className="wrapper">
-                  <Card
-                    src={image.img}
-                    title={image.title}
-                    id={image.id}
-                    index={index}
-                    moveImage={moveImage}
-                  />
-                  <p className="text">{image.title}</p>
-                </div>
-              ))
-            )}
-          </main>
+      {/* <span className="load">
+        <p className="loadingspinner"></p>
+        <p className="loading">Loading...</p>
+      </span> */}
+      <div>
+        <div className="tags">
+          <span>All</span>
+          <span>Cars</span>
+          <span>Art</span>
+          <span>Workout</span>
         </div>
-      )}
+        <main>
+          {React.Children.toArray(
+            images.map((image, index) => (
+              <div className="wrapper">
+                <Card
+                  src={image.img}
+                  title={image.title}
+                  id={image.id}
+                  index={index}
+                  moveImage={moveImage}
+                />
+                <p className="text">{image.title}</p>
+              </div>
+            ))
+          )}
+        </main>
+      </div>
     </>
   );
 };
