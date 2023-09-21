@@ -1,0 +1,20 @@
+.gallery{
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.gal-img{
+    width: 200px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.layout__wrapper{
+    padding: 3rem;
+}
+
+.layout__wrapper .card .header{
+    margin-bottom: 2rem;
+}

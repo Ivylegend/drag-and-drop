@@ -1,0 +1,139 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card {
+  width: 200px;
+  height: 300px;
+  display: flex;
+}
+
+.card img {
+  width: 100%;
+  cursor: grab;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 5px;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem 2rem;
+  padding: 4rem;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  margin-top: 2rem;
+}
+
+.text {
+  color: black;
+}
+
+.header {
+  padding: 2rem 4rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.header input {
+  border: none;
+  outline: none;
+}
+
+.tags{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: white;
+    margin: 0 4rem;
+    color: black;
+    margin-top: 2rem;
+}
+
+.tags span{
+    font-weight: 600;
+    padding: .2rem;
+}
+
+.tags span:hover{
+    border-bottom: 1px solid red;
+    cursor: pointer;
+}
+
+.search {
+  background-color: white;
+  color: black;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 5px;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header h1 {
+  margin-bottom: 1rem;
+  font-size: 3rem;
+}
+
+.load {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingspinner {
+  border: 4px solid rgba(0, 0, 0, 0.3);
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+}
+
+.loading {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 769px) {
+  .card {
+    width: 300px;
+    height: 200px;
+  }
+
+  main {
+    gap: 2rem 0;
+    padding: 2.5rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2.5rem;
+  }
+
+  .search {
+    width: 300px;
+    margin-top: 1rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+}
