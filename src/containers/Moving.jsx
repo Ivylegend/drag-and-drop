@@ -3,7 +3,7 @@ import { useDrag, useDrop } from "react-dnd";
 import "./Moving.css";
 import galleryList from "./data.js";
 import { FaSearch } from "react-icons/fa";
-import { LazyLoadImage } from 'react-lazy-loading'
+import { LazyLoadImage } from "react-lazy-loading";
 
 const Card = ({ src, title, id, index, moveImage }) => {
   const ref = React.useRef(null);
@@ -60,16 +60,9 @@ const Card = ({ src, title, id, index, moveImage }) => {
 
   return (
     <div ref={ref} style={{ opacity }} className="card">
-      <img loading="lazy" src={src} alt={title} />
+      <img src={src} alt={title} />
     </div>
   );
-};
-
-const getFilteredItems = (search, data) => {
-  if (!search) {
-    return data;
-  }
-  return data.filter((name) => name.title.includes(search));
 };
 
 const Moving = () => {
@@ -77,20 +70,9 @@ const Moving = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
 
-  // const { gal } = galleryList;
-  const { data } = images;
-
-  const filteredItems = getFilteredItems(search, data);
-
-  // useEffect(() => {
-  //   window.onload = function () {
-  //     setLoading(false);
-  //     console.log("page has loaded");
-  //   }
-  //   return () => {
-  //     window.onload = false
-  //   }
-  // }, []);
+  setInterval(() => {
+    setLoading(false);
+  }, 2000);
 
   const moveImage = React.useCallback((dragIndex, hoverIndex) => {
     setImages((prevCards) => {
@@ -107,7 +89,7 @@ const Moving = () => {
       <div className="header">
         <div>
           <h1>A Draggable Gallery</h1>
-          <p>Drag and drop the images in any loction of your choice</p>
+          <i className="text1">Drag and drop the images to rearrange to what suits you</i>
         </div>
         <div className="search">
           <input
@@ -118,34 +100,37 @@ const Moving = () => {
           <FaSearch />
         </div>
       </div>
-      {/* <span className="load">
-        <p className="loadingspinner"></p>
-        <p className="loading">Loading...</p>
-      </span> */}
-      <div>
-        <div className="tags">
-          <span>All</span>
-          <span>Cars</span>
-          <span>Art</span>
-          <span>Workout</span>
-        </div>
+      {loading ? (
+        <span className="load">
+          <p className="loadingspinner"></p>
+          <p className="loading">Loading...</p>
+        </span>
+      ) : (
         <main>
           {React.Children.toArray(
-            images.map((image, index) => (
-              <div className="wrapper">
-                <Card
-                  src={image.img}
-                  title={image.title}
-                  id={image.id}
-                  index={index}
-                  moveImage={moveImage}
-                />
-                <p className="text">{image.title}</p>
-              </div>
-            ))
+            images
+              .filter((photo) => {
+                return search.toLocaleLowerCase() === ""
+                  ? photo
+                  : photo.title
+                      .toLocaleLowerCase()
+                      .includes(search.toLocaleLowerCase());
+              })
+              .map((image, index) => (
+                <div className="wrapper">
+                  <Card
+                    src={image.img}
+                    title={image.title}
+                    id={image.id}
+                    index={index}
+                    moveImage={moveImage}
+                  />
+                  <p className="text">{image.title}</p>
+                </div>
+              ))
           )}
         </main>
-      </div>
+      )}
     </>
   );
 };

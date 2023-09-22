@@ -63,7 +63,7 @@ export default [
   {
     id: 9,
     img: Wk3,
-    title: "Man doing back exercises",
+    title: "Back exercises",
   },
   {
     id: 10,
@@ -74,11 +74,6 @@ export default [
     id: 11,
     img: Wk1,
     title: "Man lifting weight",
-  },
-  {
-    id: 12,
-    img: Wk3,
-    title: "Man doing back exercises",
   },
   {
     id: 13,
@@ -126,3 +121,10 @@ export default [
     title: "Man lifting weight",
   },
 ];
+
+
+// {
+//   id: 12,
+//   img: Wk3,
+//   title: "Man doing back exercises",
+// },
